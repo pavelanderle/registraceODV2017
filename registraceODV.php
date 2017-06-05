@@ -39,10 +39,10 @@ $_SESSION["note"] = $note;
 //print_r($logoWeb);
 $resNote = "";
 
+$uploadOk = 1;
 if($logoWeb) {
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["logoWeb"]["name"]);
-    $uploadOk = 1;
     $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
 // Check if image file is a actual image or fake image
     $errUploadApp = "";
@@ -121,6 +121,25 @@ if($uploadOk==1){
 if ($uploadOk==1 && $insertDB==1){
     $zprava = "Děkujeme za registraci. Registrace i nahrání loga proběhlo v pořádku. V co nejkratším termínu vám přijde potvrzovací mail a zároveň vás budeme kontaktovat.";
     session_unset();
+
+    $msg = "<p>Vážení partneři ODV,<br>
+děkujeme za Váš zájem o účast na akci „Otevíráme dveře vzděláním“. Vaše přihláška byla přijata a nyní je v procesu vyřizování. V nejbližší době obdržíte zálohovou fakturu. Logo a anotaci Vaší firmy zveřejníme na webu akce v seznamu partnerů 2017. </p>
+<p>Veškeré organizační pokyny, informace o umístění stánku apod. dostanete mailem po uzavření přihlašování. Pokud máte speciální požadavky nebo jakékoliv dotazy, neváhejte nás kontaktovat (odv@spseplzen.cz, 778 736 630). </p>
+<p>Zájemce o vedení přednášky v aule pro žáky školy v délce cca 15 minut prosíme, aby tento zájem vyjádřili co nejdříve. Počet přednášek je z kapacitních důvodů omezený.</p>
+<p><strong>Shrnutí přihlašovacích údajů:</strong></p>
+    <p><strong>Název firmy:</strong> $firmaName <br><strong> Ulice:</strong> $firmaStreet <br><strong>PSČ:</strong> $psc <br><strong>Město:</strong> $city <br><strong>IČO:</strong> $ico <br><strong>DIČ:</strong> $dic <br><strong>Email:</strong> $email</p>
+    <p><strong>Název firmy:</strong> $firmaNameWeb <br><strong> Anotace:</strong> $anotaceWeb</p>
+    <p><strong>Kontakt:</strong> $kontaktName <br> <strong>Kontaktní telefon:</strong> $kontaktTel <br> <strong>Kontaktní email:</strong> $kontaktEmail </p>
+    <p><strong>Poznámka:</strong> $note </p>
+    ";
+
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+    $to = "$kontaktEmail, anderle@spseplzen.cz, prochazkova@spseplzen.cz";
+
+    mail($to, "Registrace ODV 2017", $msg, $headers);
+
 }
 else{
     $zprava = "Registrace se bohužel nezdařila: <br> ".$resNote. "<br>" . $errDBCon. "<br>" . $errDBCon. "<br> Zkuste to prosím znovu nebo kontaktujte organizátory akce tel: 377 418 003, mail: prochazkova@spseplzen.cz ";
