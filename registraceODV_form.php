@@ -28,35 +28,35 @@
     <legend>Fakturační údaje</legend>
 <div class="form-group">
     <label for="firmaName">Název firmy:</label>
-        <input class="form-control" id="firmaName" value="<?php echo $_SESSION['firmaName']?>" name="firmaName" required="" type="text">
+        <input class="form-control" id="firmaName" value="<?php if (isset($_SESSION['firmaName'])) echo $_SESSION['firmaName']?>" name="firmaName" required="" type="text">
 </div>
     <div class="form-group">
         <label for="firmaStreet">Ulice, č.p:</label>
-            <input class="form-control" id="firmaStreet" value="<?php echo $_SESSION['firmaStreet']?>" name="firmaStreet" required="" type="text">
+            <input class="form-control" id="firmaStreet" value="<?php if (isset($_SESSION['firmaStreet'])) echo $_SESSION['firmaStreet']?>" name="firmaStreet" required="" type="text">
     </div>
     <div class="form-group row">
         <div class="col-xs-6">
             <label for="psc">PSČ</label>
-            <input class="form-control" value="<?php echo $_SESSION['psc']?>" name="psc" id="psc" required="" type="text">
+            <input class="form-control" value="<?php if (isset($_SESSION['psc'])) echo $_SESSION['psc']?>" name="psc" id="psc" required="" type="text">
         </div>
         <div class="col-xs-6">
             <label for="city">Město</label>
-            <input class="form-control" value="<?php echo $_SESSION['city']?>" name="city" id="city" required="" type="text">
+            <input class="form-control" value="<?php if (isset($_SESSION['city'])) echo $_SESSION['city']?>" name="city" id="city" required="" type="text">
         </div>
     </div>
 
     <div class="form-group row">
         <div class="col-xs-3">
             <label for="ico">IČO</label>
-            <input class="form-control" name="ico" id="ico" required="" type="text" value="<?php echo $_SESSION['ico']?>">
+            <input class="form-control" name="ico" id="ico" required="" type="text" value="<?php if (isset($_SESSION['ico'])) echo $_SESSION['ico']?>">
         </div>
         <div class="col-xs-3">
             <label for="dic">DIČ</label>
-            <input class="form-control" name="dic" id="dic" required="" type="text" value="<?php echo $_SESSION['dic']?>">
+            <input class="form-control" name="dic" id="dic" required="" type="text" value="<?php if (isset($_SESSION['dic'])) echo $_SESSION['dic']?>">
         </div>
         <div class="col-xs-6">
             <label for="email">email</label>
-            <input class="form-control" name="email" id="email" required="" type="email" value="<?php echo $_SESSION['email']?>">
+            <input class="form-control" name="email" id="email" required="" type="email" value="<?php if (isset($_SESSION['email'])) echo $_SESSION['email']?>">
         </div>
     </div>
 </fieldset>
@@ -72,13 +72,13 @@
     <div id="infoForWeb">
     <div class="form-group">
         <label for="firmaNameWeb">Název firmy:</label>
-        <input class="form-control" id="firmaNameWeb" name="firmaNameWeb" required="" type="text" value="<?php echo $_SESSION['firmaNameWeb']?>">
+        <input class="form-control" id="firmaNameWeb" name="firmaNameWeb" required="" type="text" value="<?php if (isset($_SESSION['firmaNameWeb'])) echo $_SESSION['firmaNameWeb']?>">
         <span class="help-block">Bude uvedeno v seznamu partnerů na webu ODV</span>
     </div>
 
     <div class="form-group">
         <label for="anotaceWeb">Anotace:</label>
-        <textarea class="form-control" id="anotaceWeb" name="anotaceWeb" required="" rows="5"><?php echo $_SESSION['anotaceWeb']?></textarea>
+        <textarea class="form-control" id="anotaceWeb" name="anotaceWeb" required="" rows="5"><?php if (isset($_SESSION['anotaceWeb'])) echo $_SESSION['anotaceWeb']?></textarea>
         <span class="help-block">Bude uvedeno v seznamu partnerů na webu ODV</span>
     </div>
 
@@ -97,21 +97,21 @@
     <div class="form-group row">
         <div class="col-xs-4">
             <label for="kontaktName">Jméno:</label>
-            <input class="form-control" name="kontaktName" id="kontaktName" required="" type="text" value="<?php echo $_SESSION['kontaktName']?>">
+            <input class="form-control" name="kontaktName" id="kontaktName" required="" type="text" value="<?php if (isset($_SESSION['kontaktName'])) echo $_SESSION['kontaktName']?>">
         </div>
         <div class="col-xs-4">
             <label for="kontaktTel">Telefon:</label>
-            <input class="form-control" name="kontaktTel" id="kontaktTel" type="text" value="<?php echo $_SESSION['kontaktTel']?>">
+            <input class="form-control" name="kontaktTel" id="kontaktTel" type="text" value="<?php if (isset($_SESSION['kontaktTel'])) echo $_SESSION['kontaktTel']?>">
         </div>
         <div class="col-xs-4">
             <label for="kontaktEmail">Email</label>
-            <input class="form-control" name="kontaktEmail" id="kontaktEmail" required="" type="email" value="<?php echo $_SESSION['kontaktEmail']?>">
+            <input class="form-control" name="kontaktEmail" id="kontaktEmail" required="" type="email" value="<?php if (isset($_SESSION['kontaktEmail'])) echo $_SESSION['kontaktEmail']?>">
         </div>
     </div>
 
     <div class="form-group">
         <label for="note">Poznámka:</label>
-        <textarea class="form-control" id="note" name="note" rows="5"><?php echo $_SESSION['note']?></textarea>
+        <textarea class="form-control" id="note" name="note" rows="5"><?php if (isset($_SESSION['note'])) echo $_SESSION['note']?></textarea>
         <span class="help-block">Sdělte nám Vaše další informace, přání nebo připomínky</span>
     </div>
 

@@ -60,7 +60,7 @@ if($logoWeb) {
 // Check if file already exists
 
 
-    if (file_exists($target_file)) {
+    if (0 && file_exists($target_file)) {
         $errUploadApp .= "zadaný soubor již existuje, ";
         $uploadOk = 0;
     }
@@ -80,9 +80,10 @@ if($logoWeb) {
     } else {
         if (move_uploaded_file($_FILES["logoWeb"]["tmp_name"], $target_file)) {
             $resNote = "Soubor " . basename($_FILES["logoWeb"]["name"]) . " byl uložen.";
+            $uploadOk = 1;
         } else {
             $resNote = "Soubor s logem bohužel nebyl uložen";
-            $uploadOk = 1;
+
         }
     }
 
@@ -98,35 +99,36 @@ VALUES ('$firmaName','$firmaStreet','$psc','$city','$ico','$dic','$email','$repe
 //print_r($logoWeb);
 
 // Check connection
+$errDBCon = "";
 if (mysqli_connect_errno())
 {
     $errDBCon = "Chyba ve spojení s DB: " . mysqli_connect_error();
 }
 mysqli_query($con,"SET CHARACTER SET utf8");
+
+$errDB = "";
 if($uploadOk==1){
-    if (mysqli_query($con,$sql)) $insertDB = 1;
-    else $insertDB = 0;
+    if (mysqli_query($con,$sql)) {
+        $insertDB = 1;
+
+    }
+    else {
+        $insertDB = 0;
+        $errDB = "Vaše údaje bohužel nebyly uloženy do DB";
+    }
 }
 
 if ($uploadOk==1 && $insertDB==1){
     $zprava = "Děkujeme za registraci. Registrace i nahrání loga proběhlo v pořádku. V co nejkratším termínu vám přijde potvrzovací mail a zároveň vás budeme kontaktovat.";
-    unset($_SESSION);
+    session_unset();
 }
-else
-$zprava = "Registrace se bohužel nezdařila: <br> ".$resNote. "<br>" . $errDBCon;
+else{
+    $zprava = "Registrace se bohužel nezdařila: <br> ".$resNote. "<br>" . $errDBCon. "<br>" . $errDBCon. "<br> Zkuste to prosím znovu nebo kontaktujte organizátory akce tel: 377 418 003, mail: prochazkova@spseplzen.cz ";
+}
+
 
 mysqli_close($con);
 
-/*
-// the message
-$msg = "First line of text\nSecond line of text";
-
-// use wordwrap() if lines are longer than 70 characters
-$msg = wordwrap($msg,70);
-
-// send email
-mail("someone@example.com","My subject",$msg);
-*/
 header("Location: http:/localhost/registraceODV2017/registraceODV_form.php?zpravaForm=$zprava");
 
 ?>
